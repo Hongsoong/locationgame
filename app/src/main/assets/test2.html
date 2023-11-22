@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위, 바위, 보 게임</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>가위, 바위, 보 게임</h1>
+
+    <div class="buttons">
+        <button id="rock">바위</button>
+        <button id="scissors">가위</button>
+        <button id="paper">보</button>
+    </div>
+
+    <div class="result">
+        <p id="message"></p>
+    </div>
+</div>
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+.container {
+  text-align: center;
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.buttons button {
+  font-size: 24px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.result p {
+  font-size: 20px;
+  margin-top: 30px;
+}
+    </style>
+
+<script>
+    const rockBtn = document.getElementById('rock');
+    const scissorsBtn = document.getElementById('scissors');
+    const paperBtn = document.getElementById('paper');
+    const message = document.getElementById('message');
+
+    var score = 0;
+
+    const choices = ['바위', '가위', '보'];
+
+    rockBtn.addEventListener('click', () => playGame('바위'));
+    scissorsBtn.addEventListener('click', () => playGame('가위'));
+    paperBtn.addEventListener('click', () => playGame('보'));
+
+    function playGame(playerChoice) {
+     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+     if (playerChoice === computerChoice) {
+      message.textContent = `비겼습니다! 당신: ${playerChoice}, 컴퓨터: ${computerChoice}`;
+     } else if (
+       (playerChoice === '바위' && computerChoice === '가위') ||
+       (playerChoice === '가위' && computerChoice === '보') ||
+       (playerChoice === '보' && computerChoice === '바위')
+     ) {
+        score++;
+      message.textContent = `축하합니다! 당신이 이겼습니다! 당신: ${playerChoice}, 컴퓨터: ${computerChoice} 점수는 ${score} 점`;
+    } else {
+      message.textContent = `아쉽네요! 당신이 졌습니다. 당신: ${playerChoice}, 컴퓨터: ${computerChoice}`;
+  }
+    if (score > 4){
+        message.textContent = `힌트는 sun123`;
+    }
+}
+  </script>
+</body>
+</html>
